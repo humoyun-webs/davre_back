@@ -13,6 +13,6 @@ const companiesget = () =>fetch(getcompanies)
 const companiesbyid = (id) =>fetch(getcompaniesbyid, id)
 const companiesupdate = (id) => fetchOne(updatecompanies, id)
 const companiesgetnotef = () => fetch(getnotef)
-const companiesgetnotefcount = () => fetch(getnotef)
+const companiesgetnotefcount = () => fetch(getnotecountcompanies)
 
-module.exports = {companiesadd, companiesget, companiesbyid , companiesupdate, companiesgetnotef}
+module.exports = {companiesadd, companiesget, companiesbyid , companiesupdate, companiesgetnotef, companiesgetnotefcount}

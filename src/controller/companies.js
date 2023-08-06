@@ -19,8 +19,8 @@ const addcompany = async(req, res) =>{
   
   if(error){
     if (error.stack == `ValidationError: "tin" must be less than or equal to 9`) {
-      return res.status(400).json({message:"Kompaniya tin bolimi 10 dan kichik son bolishi kerak !"})
-    }
+       return res.status(400).json({message:"Kompaniya tin bolimi 10 dan kichik son bolishi kerak !"})
+    } 
     if(error.stack == `ValidationError: "tin" must be a number`){
       return res.status(400).json({message:"Kompaniya tin bolimi toldirilmagan !"})
     }
@@ -101,5 +101,13 @@ const getNotef = async(req,res) =>{
  return res.status(400).json({message:"Permission denied"})
   }
 }
+const getNotefcount = async(req, res) =>{
+  try{
+  const Notefcount = await Company.companiesgetnotefcount()
+  return res.status(200).json(Notefcount)
+  }catch(error){
+    return res.status(400).json({message:"Permission denied"})
+  }
+}
 
-module.exports = {addcompany, getCompanies,getCompaniesById, getNotef}
+module.exports = {addcompany, getCompanies,getCompaniesById, getNotef, getNotefcount}
