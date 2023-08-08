@@ -1,6 +1,10 @@
- CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+create database companies;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 create type company_type as enum('1','2');
+
+    
 
 create table users(
         user_id uuid primary key DEFAULT uuid_generate_v4() null,   
@@ -46,7 +50,6 @@ user_id uuid default '307e0cc1-8e28-46fe-9806-13f0f4f14d33',
 created_at timestamp default current_timestamp
 );
 
-
 -- 2. company_tin int2(9)
 -- 3. company_mfo char(10)
 -- 4. company_account char(30)
@@ -56,3 +59,18 @@ created_at timestamp default current_timestamp
 -- 8. company_adress char(255)
 -- 9. company_phone char (20)
 --10. company_bill_id int8
+create type reestre_type as enum('0','1','2');
+
+create table reestre(
+  reestre_id uuid primary key DEFAULT uuid_generate_v4() null,
+  gover_name varchar(64) not null,
+  full_name varchar(255) not null,
+  r_location varchar(255) not null,
+  stir bigint not null,
+  oked varchar(32) not null,
+  mfo varchar(32) not null,
+  accaunt bigint not null,
+  r_type reestre_type default '0' not null,
+  created_at timestamp default current_timestamp,
+  updated_at timestamp default null
+);

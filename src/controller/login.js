@@ -10,15 +10,17 @@ const Loginc = async (req, res) => {
       const scheme = Joi.object({
         email: Joi.string().email().required(),
         password: Joi.string().required(),
-      });
+      }); 
       const {error} = scheme.validate({ email, password });
       if (error){
         return res.status(400).json({ message: error.message });
       }
+      
       const user = await User.findbyemail(email);
       if (!user) {
         return res.status(404).json({ message: "Incorrect email or password" });
-      }
+      };
+
       const verify = await bcrypt.compare(password, user.password);
       if (!verify) {
         return res.status(403).json({ message: "Incorrect email or password" });
@@ -29,5 +31,5 @@ const Loginc = async (req, res) => {
       return res.status(401).json({ message: "Permission denied" });
     }
   };
-
+   
 module.exports = {Loginc}

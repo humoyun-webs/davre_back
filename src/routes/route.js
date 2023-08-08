@@ -4,6 +4,7 @@ const {Loginc} = require("../controller/login")
 
 const {isAuth} = require("../middlewares/isAuth/isAuth-middleware")
 const {addcompany, getCompanies, getCompaniesById, getNotef, getNotefcount} = require("../controller/companies")
+const {addreestre,getReesters,getReestersById,editreestre} = require("../controller/reestre")
 
 
 routes
@@ -13,5 +14,9 @@ routes
 .get("/get/by/:id",isAuth, getCompaniesById)
 .get("/get/notefs", isAuth, getNotef)
 .get("/get/notef/count",isAuth, getNotefcount)
+.post("/add/reestre",addreestre)
+.get("/get/reesters",isAuth,getReesters)
+.get("/get/reesters/:id",isAuth,getReestersById)
+.put("/update/reestre/:id",isAuth, editreestre)
 
 module.exports = {routes}
