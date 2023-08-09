@@ -5,6 +5,7 @@ const getreestre = 'select * from reestre'
 const getreestrebyid = 'select * from reestre where reestre_id = $1'
 const updatereesters = 'UPDATE reestre SET r_type = $1 WHERE reestre_id = $2';
 const updatereestre = 'update reestre set notef = true where reestre_id = $1'
+const getnotef = 'select * from reestre where notef = false'
 
 
 
@@ -13,6 +14,7 @@ const reestreget = () =>fetch(getreestre)
 const reestregetbyid = (id) =>fetch(getreestrebyid, id)
 const reestreupdate = (type,id) =>fetchOne(updatereesters,type,id);
 const reestreupdatenotef = (id) =>fetchOne(updatereestre, id)
+const reestrenotef = () => fetch(getnotef)
 
 
 module.exports = {
@@ -20,7 +22,8 @@ module.exports = {
     reestreget,
     reestregetbyid,
     reestreupdate,
-    reestreupdatenotef
+    reestreupdatenotef,
+    reestrenotef
 }
 
 // reestre_id

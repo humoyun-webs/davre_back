@@ -1,5 +1,6 @@
 const Company = require("../model/companies")
 const Joi = require("joi")
+const Reestre = require("../model/reestre")
 
 const addcompany = async(req, res) =>{
     try{
@@ -61,11 +62,11 @@ const addcompany = async(req, res) =>{
       return res.status(403).json({message:"Kompaniya telefon raqami bolimiga notogri raqam kirgizilmoqda"})
     }
     if(error.stack == `ValidationError: "phone" must be less than or equal to 999999999`){
-      return res.status(403).json({message:"Kompaniya telefon raqami bolimiga kop raqam kirgizilmoqda kirgizilmoqda"})
+      return res.status(403).json({message:"Kompaniya telefon raqami bolimiga kop raqam  kirgizilmoqda"})
     } 
   } 
   const newCompany = await Company.companiesadd(tin, mfo,  accaunt,  bank, type, director, adress, phone);
-   return res.status(200).json({ message: "success", newCompany });
+   return res.status(201).json({ message: "success", newCompany });
     }catch(error){
     return res.status(400).json({message:"permission denied"})
     }
@@ -94,7 +95,8 @@ const getCompaniesById = async (req, res) =>{
 const getNotef = async(req,res) =>{
   try{
   const Notefs = await Company.companiesgetnotef()
-  return res.status(200).json(Notefs)
+  const Reestres = await Reestre.reestrenotef()
+  return res.status(200).json({Companies:Notefs, Reestres:Reestres})
   }catch(error){
  return res.status(400).json({message:"Permission denied"})
   }
