@@ -14,7 +14,7 @@ const addreestre = async(req, res) =>{
      stir:Joi.number().min(100000000).max(999999999).required(),
      oked:Joi.string().required(),
      mfo: Joi.string().required(),
-     accaunt: Joi.number().min(1000000000000000).max(8999999999999999).required()
+     accaunt: Joi.number().min(1000000000000000).max(9000000000000000).required()
   });
 
   const { error } = scheme.validate({ gover_name, full_name, location, stir, oked, mfo, accaunt });
@@ -53,18 +53,6 @@ const addreestre = async(req, res) =>{
     if(error.stack == `ValidationError: "mfo" is not allowed to be empty`){
       return res.status(403).json({message:"Mfo bolimi toldirilmagan !"})
     }
-    // if(error.stack == `ValidationError: "adress" is not allowed to be empty`){
-    //   return res.status(403).json({message:"Kompaniya address bolimi toldirilmagan !"})
-    // }
-    // if(error.stack == `ValidationError: "phone" must be a number`){
-    //   return res.status(403).json({message:"Kompaniya telefon raqami bolimi toldirilmagan !"})
-    // };
-    // if(error.stack == `ValidationError: "phone" must be greater than or equal to 330000001`){
-    //   return res.status(403).json({message:"Kompaniya telefon raqami bolimiga notogri raqam kirgizilmoqda"})
-    // }
-    // if(error.stack == `ValidationError: "phone" must be less than or equal to 999999999`){
-    //   return res.status(403).json({message:"Kompaniya telefon raqami bolimiga kop raqam kirgizilmoqda kirgizilmoqda"})
-    // } 
   } 
   const newReestre = await Reestre.reestreadd(gover_name, full_name, location, stir, oked, mfo, accaunt);
    return res.status(200).json({ message: "success", newReestre });
@@ -79,17 +67,18 @@ const getReesters = async ( _,res) =>{
       return res.status(200).json(Reesters)
     }catch(error){
     return res.status(400).json({message:"Permission denied"})
-    }
-    }
+    }}
     
     const getReestersById = async (req, res) =>{
       try{
-       const {id} = req.params
+       const {id} = req.params;
        console.log(req.params);
        const Reesters = await Reestre.reestregetbyid(id)
+       const Notef = await Reestre.reestreupdatenotef(id)
        return res.status(200).json(Reesters)
       }catch(error){
     return res.status(400).json({message:"Permission denied"})
+    
       }
     }
 
@@ -101,15 +90,16 @@ const getReesters = async ( _,res) =>{
               type:Joi.string().valid("1","2").required()
             });
             const { error } = scheme.validate({ type });
-          
+           
             if (error) return res.status(403).json({ message: error.message });
           
             const Reesters = await Reestre.reestreupdate(type,id);
           
             return res.status(201).json({ message: "edit success", newReester: Reesters });
+        
         }catch(error){
-// return res.status(403).json({ message:"Permission denied"})
-console.log(error.message);
+return res.status(403).json({ message:"Permission denied"})
+
 }
       };
 

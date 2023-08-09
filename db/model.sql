@@ -70,6 +70,7 @@ create table reestre(
   oked varchar(32) not null,
   mfo varchar(32) not null,
   accaunt bigint not null,
+  notef boolean default false,
   r_type reestre_type default '0' not null,
   created_at timestamp default current_timestamp,
   updated_at timestamp default null

@@ -5,7 +5,7 @@ const getcompanies = 'select * from companies'
 const getcompaniesbyid = 'select * from companies where company_id = $1'
 const updatecompanies = 'update companies set notef = true where company_id = $1'
 const getnotef = 'select * from companies where notef = false'
-const getnotecountcompanies = 'SELECT count(*) FROM companies WHERE notef = false'
+const getnotecountcompanies = 'SELECT(SELECT COUNT(*) FROM companies WHERE notef = false)+(SELECT COUNT(*) FROM reestre WHERE notef = false) AS total_count'
 
 
 const companiesadd = (tin, mfo, accaunt, bank, type, director, adress, phone) =>fetchOne(addcompanies, tin, mfo, accaunt, bank, type, director, adress, phone)
