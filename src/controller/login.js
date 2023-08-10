@@ -24,12 +24,12 @@ const Loginc = async (req, res) => {
       const verify = await bcrypt.compare(password, user.password);
       if (!verify) {
         return res.status(403).json({ message: "Incorrect email or password" });
-      }
+      };
       const token = sign({ id: user.user_id, role: user.role });
       res.status(200).json({ message: "Success", token });
     } catch (error) {
       return res.status(401).json({ message: "Permission denied" });
     }
   };
-   
+  
 module.exports = {Loginc}

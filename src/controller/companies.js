@@ -79,7 +79,7 @@ try{
 }catch(error){
 return res.status(400).json({message:"Permission denied"})
 }
-}
+};
 
 const getCompaniesById = async (req, res) =>{
   try{
@@ -89,7 +89,7 @@ const getCompaniesById = async (req, res) =>{
    const Companies = await Company.companiesbyid(id)
    return res.status(200).json(Companies)
   }catch(error){
-
+    return res.status(403).json({message:"Permission denied"})
   }
 }
 const getNotef = async(req,res) =>{

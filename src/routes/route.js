@@ -1,7 +1,6 @@
 const {Router} = require("express")
 const routes = Router()
 const {Loginc} = require("../controller/login")
-
 const {isAuth} = require("../middlewares/isAuth/isAuth-middleware")
 const {addcompany, getCompanies, getCompaniesById, getNotef, getNotefcount} = require("../controller/companies")
 const {addreestre,getReesters,getReestersById,editreestre} = require("../controller/reestre")
@@ -18,6 +17,5 @@ routes
 .get("/get/reesters",isAuth,getReesters)
 .get("/get/reesters/:id",isAuth,getReestersById)
 .put("/update/reestre/:id",isAuth, editreestre)
-
 
 module.exports = {routes}
